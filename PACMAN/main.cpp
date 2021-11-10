@@ -15,6 +15,13 @@ int main()
 	game.setBoard();
 	game.printBoard();
 
+	while (1)
+	{
+		game.setBoard();
+		game.printBoard();
+		
+	}
+
 	/*Ghost G;
 	cout << G.getRow();
 	cout << endl;

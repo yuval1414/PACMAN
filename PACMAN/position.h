@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Header.h"
 #include "gotoxy.h"
 
@@ -15,7 +15,7 @@ public:
 		m_rowDir = 1;						// direction (1, 0) down
 		m_colDir = 0;						 //CHECK!!!!
 	}
-	void init(int row, int col)		//????? ????? 
+	void init(int row, int col)		//אתחול נקודה 
 	{
 		m_row = row;
 		m_col = col;
@@ -26,6 +26,8 @@ public:
 	//void gotoxy(int row, int col);
 	int getRow()const;
 	int getCol()const;
+	void setRow(int row);
+	void setCol(int col);
 	void move();                 //random move for ghosts
 	void move(int dir);          //move by keyboard hits
 	void draw(char ch)

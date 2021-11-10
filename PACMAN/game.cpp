@@ -10,7 +10,8 @@ Game::Game()
 	this->m_pac;
 	this->m_g1;
 	this->m_g2;
-	this->points = 0;
+	this->m_points = 0;
+	this->m_lives = 3;
 }
 
 //Cell Game::getBoard()
@@ -52,7 +53,6 @@ void Game::setBoard()
 		}
 	}
 }
-
 void Game::printBoard()
 {
 	int row, col;
@@ -60,12 +60,76 @@ void Game::printBoard()
 	{
 		for (col = 0; col < MAX_COL; col++)
 		{
+			if (isCollide(row, col))  // pac collides with a ghost - prints the ghost
+			{
+				if(m_g1.getRow() == row && m_g1.getCol() == col)
+					m_g1.print();
+				else
+					m_g2.print();
+			}	 
+			else if (m_board[row][col].getisPac())
+				m_pac.draw();	//convert to print!!!!!
+			else if (m_g1.getRow() == row && m_g1.getCol() == col)
+				m_g1.print();
+			else if(m_g2.getRow() == row && m_g2.getCol() == col)
+				m_g2.print();
+			else
 			m_board[row][col].printCell();
 		}
 		cout << endl;
 	}
-
 }
+
+bool Game::isCollide(int row, int col)
+{
+	if (m_board[row][col].getisPac() == true && m_board[row][col].getisGhost() == true)
+		return true;
+	else
+		return false;
+}
+
+
+void Game::setPac(int row)
+{
+	m_pac.setRow(row);
+}
+Pacman Game::getPac()const
+{
+	return m_pac;
+}
+void Game::setCell(int row, int col,char ch, bool isBC, bool isPac, bool isGhost)
+{
+	m_board[row][col].setChar(ch);
+	m_board[row][col].setisBC(isBC);
+	m_board[row][col].setisPac(isPac);
+	m_board[row][col].setisGhost(isGhost);
+}
+Cell Game::getCell(int row, int col)const
+{
+	return m_board[row][col];
+}
+
+
+void Game::setLives() 
+{
+	this->m_lives--;
+}
+int Game::getLives()const 
+{
+	return this->m_lives;
+}
+void Game:: losingLife(Cell c)    // getting a cell and cheking if the pac and the ghost is in it--> if yes remobing one life
+{								// maybe return a value that tell us there has been a change in number of lives
+	if (c.getisPac() == true && c.getisGhost() == true)
+		setLives();
+}
+
+//void Game::ghostNotInEmptyCell(Cell c)
+//{
+//	if(c.getisGhost == true && c.getisBC == true)
+//		
+//}
+
 
 //void Game::printGame()
 //{
@@ -89,7 +153,6 @@ void Game::printBoard()
 //	this->m_g1.print();
 //	this->m_g2.print();
 //}
-
 
 //void Game::runGame()
 //{
@@ -143,3 +206,4 @@ void Game::printBoard()
 //{
 //
 //}
+

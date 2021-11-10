@@ -56,7 +56,7 @@ bool Cell::getisGhost() const
 
 void Cell::printCell()
 {
-	cout << this->m_ch;
+	cout << this->m_ch;	
 }
 
 //Board:: Board()                   //constractor

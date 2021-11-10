@@ -18,6 +18,14 @@ using namespace std;
 //	cout.flush();
 //	SetConsoleCursorPosition(hConsoleOutput, dwCursorPosition);
 //}
+void Position::setRow(int row)
+{
+	m_row = row;
+}
+void Position::setCol(int col)
+{
+	m_col = col;
+}
 int Position::getRow() const
 {
 	return this->m_row;
